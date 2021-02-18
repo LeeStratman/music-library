@@ -2,13 +2,15 @@ import React from "react";
 import axios from "axios";
 import MusicTable from "../MusicTable/musicTable";
 import Loading from "../Loading/loading";
+import Error from "../Error/error";
 
-class MusicController extends React.Component {
+class Music extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
       isReady: false,
+      error: "",
     };
   }
 
@@ -23,16 +25,23 @@ class MusicController extends React.Component {
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          error: "Network Request Failed!",
+        });
       });
   }
 
   render() {
-    return this.state.isReady ? (
-      <MusicTable data={this.state.data} />
+    const { isReady, data, error } = this.state;
+
+    return isReady ? (
+      <MusicTable data={data} />
+    ) : error ? (
+      <Error message={error} />
     ) : (
       <Loading />
     );
   }
 }
 
-export default MusicController;
+export default Music;
