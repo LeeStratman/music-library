@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import Music from "./MusicController/musicController";
 import Footer from "./Footer/footer";
 
 class App extends React.Component {
@@ -12,6 +13,7 @@ class App extends React.Component {
             <p className="lead my-3">For your listening pleasure.</p>
           </div>
         </div>
+        <Music />
         <Footer />
       </div>
     );
