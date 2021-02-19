@@ -8,11 +8,11 @@ const MusicTable = ({ music }) => {
       <table className="table table-striped table-sm">
         <thead>
           <tr>
-            <td key={1}>Title</td>
-            <td key={2}>Album</td>
-            <td key={3}>Artist</td>
-            <td key={4}>Genre</td>
-            <td key={5}>Release Date</td>
+            <td key={"title"}>Title</td>
+            <td key={"album"}>Album</td>
+            <td key={"artist"}>Artist</td>
+            <td key={"genre"}>Genre</td>
+            <td key={"releaseDate"}>Release Date</td>
           </tr>
         </thead>
         <tbody>

@@ -7,8 +7,8 @@ const MusicDisplay = ({ music }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filterMusic = (music) => (attribute) => (searchTerm) =>
-    music.filter(
-      (song) => song[attribute].toLowerCase() === searchTerm.toLowerCase()
+    music.filter((song) =>
+      song[attribute].toLowerCase().includes(searchTerm.toLowerCase())
     );
 
   const updateAttribute = (event) => {
