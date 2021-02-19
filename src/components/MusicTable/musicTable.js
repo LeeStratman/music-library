@@ -4,7 +4,7 @@ import Error from "../Error/error";
 
 const MusicTable = ({ music }) => {
   return music.length > 0 ? (
-    <div className="container table-responsive">
+    <div className="table-responsive">
       <table className="table table-striped table-sm">
         <thead>
           <tr>
