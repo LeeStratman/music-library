@@ -1,5 +1,5 @@
 import React from "react";
-import MusicData from "../../musicData";
+import MusicData from "../../musicAPI";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import Loading from "../Loading/loading";
 import Error from "../Error/error";
@@ -14,7 +14,7 @@ class MusicLibrary extends React.Component {
   }
 
   componentDidMount() {
-    MusicData()
+    MusicData.get()
       .then((music) => {
         this.addMusic(music.data);
       })
@@ -27,7 +27,7 @@ class MusicLibrary extends React.Component {
 
   addMusic(music) {
     this.setState({
-      music: music,
+      music: MusicData.clean(music),
     });
   }
 

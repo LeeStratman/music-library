@@ -1,8 +1,8 @@
 import React from "react";
 
 const Loading = () => (
-  <div className="alert alert-dark" role="alert">
-    Loading...
+  <div className="container alert alert-dark" role="alert">
+    Loading Music Library
   </div>
 );
 
