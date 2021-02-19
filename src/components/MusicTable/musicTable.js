@@ -1,8 +1,9 @@
 import React from "react";
 import TableRow from "../TableRow/tableRow";
+import Error from "../Error/error";
 
 const MusicTable = ({ music }) => {
-  return (
+  return music.length > 0 ? (
     <div className="container table-responsive">
       <table className="table table-striped table-sm">
         <thead>
@@ -21,6 +22,8 @@ const MusicTable = ({ music }) => {
         </tbody>
       </table>
     </div>
+  ) : (
+    <Error message="No music found." />
   );
 };
 
