@@ -18,9 +18,7 @@ const MusicDisplay = ({ music }) => {
   };
 
   const musicList = (music) => {
-    if (!attribute || !searchTerm) {
-      return music;
-    }
+    if (!attribute || !searchTerm) return music;
     return filterMusic(music)(attribute)(searchTerm);
   };
 
