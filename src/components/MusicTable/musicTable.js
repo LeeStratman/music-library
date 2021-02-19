@@ -1,7 +1,7 @@
 import React from "react";
 import TableRow from "../TableRow/tableRow";
 
-const MusicTable = (props) => {
+const MusicTable = ({ music }) => {
   return (
     <div className="container table-responsive">
       <table className="table table-striped table-sm">
@@ -15,8 +15,8 @@ const MusicTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((music) => {
-            return <TableRow key={music.id} data={music} />;
+          {music.map((song) => {
+            return <TableRow key={song.id} data={song} />;
           })}
         </tbody>
       </table>

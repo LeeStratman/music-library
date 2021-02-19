@@ -31,7 +31,7 @@ const MusicDisplay = ({ music }) => {
           searchTerm={searchTerm}
           updateSearchTerm={updateSearchTerm}
         />
-        <MusicTable data={musicList(music)} />
+        <MusicTable music={musicList(music)} />
       </div>
     </>
   );
