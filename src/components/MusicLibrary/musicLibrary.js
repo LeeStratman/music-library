@@ -19,7 +19,7 @@ class MusicLibrary extends React.Component {
         this.addMusic(music.data);
       })
       .catch((error) => {
-        this.setSate({
+        this.setState({
           error: "Library failed to load.",
         });
       });
