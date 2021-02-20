@@ -1,5 +1,5 @@
 import React from "react";
-import MusicData from "../../musicAPI";
+import { cleanMusic, fetchMusic } from "../../music";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import Loading from "../Loading/loading";
 import Error from "../Error/error";
@@ -14,20 +14,18 @@ class MusicLibrary extends React.Component {
   }
 
   componentDidMount() {
-    MusicData.get()
-      .then((music) => {
-        this.addMusic(music.data);
+    fetchMusic()
+      .then((data) => {
+        this.addMusic(data.data);
       })
       .catch((error) => {
-        this.setState({
-          error: "Library failed to load.",
-        });
+        this.setState({ error: "Library failed to load." });
       });
   }
 
   addMusic(music) {
     this.setState({
-      music: MusicData.clean(music),
+      music: cleanMusic(music),
     });
   }
 
