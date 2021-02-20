@@ -3,17 +3,23 @@ import React from "react";
 const Filter = (props) => {
   return (
     <div className="input-group mb-3">
-      <span className="input-group-text">Filter</span>
+      <span className="input-group-text">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+      </span>
       <select
         className="form-select form-select-lg"
         value={props.attribute}
         onChange={props.updateAttribute}
       >
-        <option value="">Select an attribute: </option>
-        <option value="title">Title</option>
-        <option value="album">Album</option>
-        <option value="artist">Artist</option>
-        <option value="genre">Genre</option>
+        {props.fields.map((field) => {
+          return (
+            <option key={field.key} value={field.key}>
+              {field.name}
+            </option>
+          );
+        })}
       </select>
       <input
         disabled={!props.attribute}

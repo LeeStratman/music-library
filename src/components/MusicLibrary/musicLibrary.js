@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanMusic, fetchMusic } from "../../music";
+import { getDisplayFields, cleanMusic, fetchMusic } from "../../music";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import Loading from "../Loading/loading";
 import Error from "../Error/error";
@@ -39,7 +39,7 @@ class MusicLibrary extends React.Component {
     return error ? (
       <Error message={error} />
     ) : this.hasMusic() ? (
-      <MusicDisplay music={music} />
+      <MusicDisplay music={music} fields={getDisplayFields()} />
     ) : (
       <Loading />
     );

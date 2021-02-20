@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import MusicTable from "../MusicTable/musicTable";
 import Filter from "../Filter/filter";
 
-const MusicDisplay = ({ music }) => {
-  const [attribute, setAttribute] = useState("");
+const MusicDisplay = ({ music, fields }) => {
+  const [attribute, setAttribute] = useState(fields[0].key);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filterMusic = (music) => (attribute) => (searchTerm) =>
     music.filter((song) =>
-      song[attribute].toLowerCase().includes(searchTerm.toLowerCase())
+      song[attribute].toLowerCase().includes(searchTerm.toLowerCase().trim())
     );
 
   const updateAttribute = (event) => {
@@ -28,6 +28,7 @@ const MusicDisplay = ({ music }) => {
     <>
       <div className="container">
         <Filter
+          fields={fields}
           attribute={attribute}
           updateAttribute={updateAttribute}
           searchTerm={searchTerm}

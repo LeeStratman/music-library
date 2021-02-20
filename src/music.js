@@ -21,6 +21,14 @@ function getExpectedKeys() {
   return getFieldsProperty("key");
 }
 
+export function getDisplayFields() {
+  return fields
+    .filter((field) => field.display)
+    .map((field) => {
+      return { name: field.name, key: field.key };
+    });
+}
+
 function filterValidKeys(keys) {
   return getExpectedKeys().filter((key) => keys.includes(key));
 }
