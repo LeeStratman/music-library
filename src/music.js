@@ -10,7 +10,7 @@ export const fields = [
 ];
 
 export function fetchMusic() {
-  return axios.get(`http://www.devcodecampmusiclibrary.com/apis/music`);
+  return axios.get(`http://www.devcodecampmusiclibrary.com/api/music`);
 }
 
 function getFieldsProperty(key) {
