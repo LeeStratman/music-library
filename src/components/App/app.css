@@ -2,7 +2,30 @@
   background-color: #413c69 !important;
 }
 
+body {
+  background-color: #edecf4;
+}
+
+.bg-light {
+  background-color: #948fbf !important;
+}
+
 thead {
-  background-color: #413c69;
+  background-color: #5d5696;
   color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #b7b3d3;
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #e8e7f1;
+}
+
+table {
+  border: 1px solid #413c69;
+}
+
+.table td {
+  border-color: #332f53;
 }
