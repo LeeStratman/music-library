@@ -7,6 +7,7 @@ export const fields = [
   { key: "artist", name: "Artist", display: true },
   { key: "genre", name: "Genre", display: true },
   { key: "releaseDate", name: "Release Date", display: true },
+  { key: "cover", name: "Cover Date", display: true },
 ];
 
 export function fetchMusic() {
@@ -29,19 +30,17 @@ export function getDisplayFields() {
     });
 }
 
-function filterValidKeys(keys) {
-  return getExpectedKeys().filter((key) => keys.includes(key));
-}
-
 export function cleanMusic(music) {
   return music.map((song) => cleanSong(song));
 }
 
 function cleanSong(song) {
-  let receivedKeys = Object.keys(song);
-  let validKeys = filterValidKeys(receivedKeys);
-  return validKeys.reduce((accumulator, key) => {
-    accumulator[key] = song[key];
+  return getExpectedKeys().reduce((accumulator, key) => {
+    if (song.hasOwnProperty(key)) {
+      accumulator[key] = song[key];
+    } else {
+      accumulator[key] = "-";
+    }
     return accumulator;
   }, {});
 }

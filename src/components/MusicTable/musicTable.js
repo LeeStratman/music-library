@@ -2,22 +2,20 @@ import React from "react";
 import TableRow from "../TableRow/tableRow";
 import Error from "../Error/error";
 
-const MusicTable = ({ music }) => {
+const MusicTable = ({ music, fields }) => {
   return music.length > 0 ? (
     <div className="table-responsive">
       <table className="table table-striped table-sm">
         <thead>
           <tr>
-            <td key={"title"}>Title</td>
-            <td key={"album"}>Album</td>
-            <td key={"artist"}>Artist</td>
-            <td key={"genre"}>Genre</td>
-            <td key={"releaseDate"}>Release Date</td>
+            {fields.map((field) => {
+              return <td key={field.key}>{field.name}</td>;
+            })}
           </tr>
         </thead>
         <tbody>
           {music.map((song) => {
-            return <TableRow key={song.id} data={song} />;
+            return <TableRow key={song.id} data={song} fields={fields} />;
           })}
         </tbody>
       </table>

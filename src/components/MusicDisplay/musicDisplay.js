@@ -34,7 +34,7 @@ const MusicDisplay = ({ music, fields }) => {
           searchTerm={searchTerm}
           updateSearchTerm={updateSearchTerm}
         />
-        <MusicTable music={musicList(music)} />
+        <MusicTable music={musicList(music)} fields={fields} />
       </div>
     </>
   );
