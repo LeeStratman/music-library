@@ -7,7 +7,6 @@ export const fields = [
   { key: "artist", name: "Artist", display: true },
   { key: "genre", name: "Genre", display: true },
   { key: "releaseDate", name: "Release Date", display: true },
-  { key: "cover", name: "Cover Date", display: true },
 ];
 
 export function fetchMusic() {
