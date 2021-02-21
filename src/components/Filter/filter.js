@@ -26,7 +26,7 @@ const Filter = (props) => {
         type="text"
         className="form-control"
         id="basic-url"
-        placeholder={`Type to search by ${props.attribute}...`}
+        placeholder={`Type to filter by ${props.attribute}...`}
         onChange={props.updateSearchTerm}
       />
     </div>

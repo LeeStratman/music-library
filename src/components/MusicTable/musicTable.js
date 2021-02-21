@@ -3,7 +3,7 @@ import TableRow from "../TableRow/tableRow";
 import Error from "../Error/error";
 
 const MusicTable = ({ music, fields }) => {
-  return music.length > 0 ? (
+  return music && music.length > 0 ? (
     <div className="table-responsive">
       <table className="table table-striped table-sm">
         <thead>
