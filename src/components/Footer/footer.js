@@ -1,11 +1,14 @@
 import React from "react";
-import "./footer.css";
 
 const Footer = (props) => {
   return (
-    <footer className="footer mt-auto py-3 bg-dark">
-      <div>
-        <span className="pl-3 text-white">Developed for devCodeCamp</span>
+    <footer className="bg-white">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+        <div className="mt-8 md:mt-0 md:order-1">
+          <p className="text-center text-base text-gray-400">
+            Built for devCodeCamp.
+          </p>
+        </div>
       </div>
     </footer>
   );
