@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import "./app.css";
 import Header from "../Header/header";
 import MusicLibrary from "../MusicLibrary/musicLibrary";
