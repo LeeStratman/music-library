@@ -36,12 +36,14 @@ class MusicLibrary extends React.Component {
   render() {
     const { music, error } = this.state;
 
-    return error ? (
-      <Error message={error} />
-    ) : this.hasMusic() ? (
-      <MusicDisplay music={music} fields={getDisplayFields()} />
-    ) : (
-      <Loading />
+    return (
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        {error && <Error message={error} />}
+        {this.hasMusic() && (
+          <MusicDisplay music={music} fields={getDisplayFields()} />
+        )}
+        {!this.hasMusic() && <Loading />}
+      </div>
     );
   }
 }
