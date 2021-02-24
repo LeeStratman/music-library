@@ -14,6 +14,7 @@ class MusicLibrary extends React.Component {
     };
 
     this.handleAddPlaylistForm = this.handleAddPlaylistForm.bind(this);
+    this.deletePlaylist = this.deletePlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +46,12 @@ class MusicLibrary extends React.Component {
     });
   }
 
+  deletePlaylist(name) {
+    this.setState({
+      playlists: [...this.state.playlists.filter((list) => list.name !== name)],
+    });
+  }
+
   handleAddPlaylistForm(event) {
     event.preventDefault();
     let name = event.target.elements.addPlaylist.value;
@@ -67,6 +74,7 @@ class MusicLibrary extends React.Component {
               <PlaylistSidebar
                 playlists={playlists}
                 addPlaylist={this.handleAddPlaylistForm}
+                deletePlaylist={this.deletePlaylist}
               />
               <MusicDisplay
                 music={playlists[0].music}
