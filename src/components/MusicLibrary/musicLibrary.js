@@ -44,7 +44,9 @@ class MusicLibrary extends React.Component {
         {this.hasMusic() && (
           <MusicDisplay music={music} fields={getDisplayFields()} />
         )}
-        {!error && !this.hasMusic() && <Loading />}
+        {!error && !this.hasMusic() && (
+          <Loading message={"Loading music library"} />
+        )}
       </div>
     );
   }
