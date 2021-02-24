@@ -1,6 +1,7 @@
 import React from "react";
 
 const PlaylistSidebar = ({ playlists }) => {
+  const createPlaylist = (e) => {};
   return (
     <div className="flex flex-col flex-shrink-0 w-64">
       <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
@@ -19,6 +20,62 @@ const PlaylistSidebar = ({ playlists }) => {
               </span>
             </li>
           ))}
+
+          <div>
+            <label
+              for="addPlaylist"
+              className="block text-sm font-medium text-gray-700 sr-only"
+            >
+              Add playlist
+            </label>
+            <div className="mt-1 flex rounded-md shadow-sm">
+              <div className="relative flex items-stretch flex-grow focus-within:z-10">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  name="addPlaylist"
+                  id="addPlaylist"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300"
+                  placeholder="Add playlist"
+                />
+              </div>
+              <button
+                className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                onClick={createPlaylist}
+              >
+                <svg
+                  className="h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                <span className="sr-only">Add</span>
+              </button>
+            </div>
+          </div>
         </ul>
       </div>
     </div>
