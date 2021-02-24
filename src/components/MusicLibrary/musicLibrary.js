@@ -19,7 +19,9 @@ class MusicLibrary extends React.Component {
         this.addMusic(data.data);
       })
       .catch((error) => {
-        this.setState({ error: "Library failed to load." });
+        this.setState({
+          error: `Library failed with following error: ${error.message}`,
+        });
       });
   }
 
@@ -42,7 +44,7 @@ class MusicLibrary extends React.Component {
         {this.hasMusic() && (
           <MusicDisplay music={music} fields={getDisplayFields()} />
         )}
-        {!this.hasMusic() && <Loading />}
+        {!error && !this.hasMusic() && <Loading />}
       </div>
     );
   }
