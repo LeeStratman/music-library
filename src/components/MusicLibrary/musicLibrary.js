@@ -37,7 +37,7 @@ class MusicLibrary extends React.Component {
     const { music, error } = this.state;
 
     return (
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         {error && <Error message={error} />}
         {this.hasMusic() && (
           <MusicDisplay music={music} fields={getDisplayFields()} />
