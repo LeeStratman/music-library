@@ -26,7 +26,7 @@ const MusicDisplay = ({ music, fields }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="flex-grow ml-5">
         <Filter
           fields={fields}
           attribute={attribute}

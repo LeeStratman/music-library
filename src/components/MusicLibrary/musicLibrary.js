@@ -3,13 +3,14 @@ import { getDisplayFields, cleanMusic, fetchMusic } from "../../music";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import Loading from "../Loading/loading";
 import Error from "../Error/error";
+import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      music: [],
       error: false,
+      playlists: [],
     };
   }
 
@@ -25,24 +26,32 @@ class MusicLibrary extends React.Component {
       });
   }
 
-  addMusic(music) {
+  addMusic(music, name = "All") {
     this.setState({
-      music: cleanMusic(music),
+      playlists: [...this.state.playlists, { name, music: cleanMusic(music) }],
     });
   }
 
   hasMusic() {
-    return this.state.music.length > 0;
+    return this.state.playlists.length > 0;
   }
 
   render() {
-    const { music, error } = this.state;
+    const { error, playlists } = this.state;
 
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         {error && <Error message={error} />}
         {this.hasMusic() && (
-          <MusicDisplay music={music} fields={getDisplayFields()} />
+          <>
+            <div className="flex overflow-hidden bg-white">
+              <PlaylistSidebar playlists={playlists} />
+              <MusicDisplay
+                music={playlists[0].music}
+                fields={getDisplayFields()}
+              />
+            </div>
+          </>
         )}
         {!error && !this.hasMusic() && (
           <Loading message={"Loading music library"} />
