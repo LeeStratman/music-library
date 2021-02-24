@@ -10,8 +10,10 @@ class MusicLibrary extends React.Component {
     super(props);
     this.state = {
       error: false,
-      playlists: [],
+      playlists: [{ name: "All", music: [] }],
     };
+
+    this.handleAddPlaylistForm = this.handleAddPlaylistForm.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +28,27 @@ class MusicLibrary extends React.Component {
       });
   }
 
-  addMusic(music, name = "All") {
+  addMusic(music) {
+    let defaultList = this.state.playlists.find((list) => list.name === "All");
+    defaultList.music = [...defaultList.music, ...music];
     this.setState({
-      playlists: [...this.state.playlists, { name, music: cleanMusic(music) }],
+      playlists: [
+        ...this.state.playlists.filter((list) => list.name !== "All"),
+        defaultList,
+      ],
     });
+  }
+
+  addPlaylist(name) {
+    this.setState({
+      playlists: [...this.state.playlists, { name, music: [] }],
+    });
+  }
+
+  handleAddPlaylistForm(event) {
+    event.preventDefault();
+    let name = event.target.elements.addPlaylist.value;
+    this.addPlaylist(name);
   }
 
   hasMusic() {
@@ -45,7 +64,10 @@ class MusicLibrary extends React.Component {
         {this.hasMusic() && (
           <>
             <div className="flex overflow-hidden bg-white">
-              <PlaylistSidebar playlists={playlists} />
+              <PlaylistSidebar
+                playlists={playlists}
+                addPlaylist={this.handleAddPlaylistForm}
+              />
               <MusicDisplay
                 music={playlists[0].music}
                 fields={getDisplayFields()}

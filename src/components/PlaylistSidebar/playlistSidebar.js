@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-const PlaylistSidebar = ({ playlists }) => {
-  const createPlaylist = (e) => {};
+const PlaylistSidebar = ({ playlists, addPlaylist }) => {
+  const [playlistName, setPlaylistName] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleNameChange = (event) => {
+    const { value } = event.target;
+
+    setPlaylistName(value);
+    !validatePlaylist(value) ? setError(true) : setError(false);
+  };
+
+  const validatePlaylist = (value) => {
+    let duplicate = playlists.filter(
+      (list) => list.name.toLowerCase() === value.toLowerCase().trim()
+    );
+
+    if (duplicate.length > 0) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className="flex flex-col flex-shrink-0 w-64">
       <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
@@ -21,7 +40,7 @@ const PlaylistSidebar = ({ playlists }) => {
             </li>
           ))}
 
-          <div>
+          <form onSubmit={addPlaylist}>
             <label
               for="addPlaylist"
               className="block text-sm font-medium text-gray-700 sr-only"
@@ -52,11 +71,15 @@ const PlaylistSidebar = ({ playlists }) => {
                   id="addPlaylist"
                   className="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300"
                   placeholder="Add playlist"
+                  onChange={handleNameChange}
+                  value={playlistName}
                 />
+                {error && <p>error</p>}
               </div>
               <button
+                disabled={error || playlistName.trim() === ""}
+                type="submit"
                 className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                onClick={createPlaylist}
               >
                 <svg
                   className="h-5 w-5 text-gray-400"
@@ -75,7 +98,7 @@ const PlaylistSidebar = ({ playlists }) => {
                 <span className="sr-only">Add</span>
               </button>
             </div>
-          </div>
+          </form>
         </ul>
       </div>
     </div>
