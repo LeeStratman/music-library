@@ -4,21 +4,35 @@ import Error from "../Error/error";
 
 const MusicTable = ({ music, fields }) => {
   return music && music.length > 0 ? (
-    <div className="table-responsive">
-      <table className="table table-striped table-sm">
-        <thead>
-          <tr>
-            {fields.map((field) => {
-              return <td key={field.key}>{field.name}</td>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {music.map((song) => {
-            return <TableRow key={song.id} data={song} fields={fields} />;
-          })}
-        </tbody>
-      </table>
+    <div className="flex flex-col mb-4">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  {fields.map((field) => {
+                    return (
+                      <th
+                        key={field.key}
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        {field.name}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {music.map((song) => {
+                  return <TableRow key={song.id} data={song} fields={fields} />;
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   ) : (
     <Error message="No music found." />
