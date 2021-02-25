@@ -1,6 +1,6 @@
 import React from "react";
-import TableRow from "../TableRow/tableRow";
 import Error from "../Error/error";
+import FlyoutMenu from "../FlyoutMenu/flyoutMenu";
 
 const MusicTable = ({ music, fields }) => {
   return music && music.length > 0 ? (
@@ -26,7 +26,23 @@ const MusicTable = ({ music, fields }) => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {music.map((song) => {
-                  return <TableRow key={song.id} data={song} fields={fields} />;
+                  return (
+                    <tr key={song.id}>
+                      {fields.map((field) => {
+                        return (
+                          <td
+                            className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                            key={field.key}
+                          >
+                            {song[field.key]}
+                          </td>
+                        );
+                      })}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <FlyoutMenu />
+                      </td>
+                    </tr>
+                  );
                 })}
               </tbody>
             </table>
