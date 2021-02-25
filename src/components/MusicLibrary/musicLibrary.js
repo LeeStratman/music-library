@@ -31,7 +31,7 @@ class MusicLibrary extends React.Component {
 
   addMusic(music) {
     let defaultList = this.state.playlists.find((list) => list.name === "All");
-    defaultList.music = [...defaultList.music, ...music];
+    defaultList.music = [...defaultList.music, ...cleanMusic(music)];
     this.setState({
       playlists: [
         ...this.state.playlists.filter((list) => list.name !== "All"),
