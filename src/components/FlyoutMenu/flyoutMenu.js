@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FlyoutMenu = () => {
+const FlyoutMenu = ({ item, options }) => {
   const [open, setOpen] = useState(false);
 
   const flyoutClass = open
@@ -8,7 +8,6 @@ const FlyoutMenu = () => {
     : "transition ease-out duration-200 opacity-0 translate-y-1 hidden";
 
   function handleClick(e) {
-    console.log("hello");
     setOpen(!open);
   }
 
@@ -40,11 +39,19 @@ const FlyoutMenu = () => {
         >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-              <button className="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                <p className="text-base font-medium text-gray-900">
-                  Add to Playlist
-                </p>
-              </button>
+              {options.map((option) => {
+                return (
+                  <button
+                    key={option.name}
+                    className="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150"
+                    onClick={() => option.action(option.id, item)}
+                  >
+                    <p className="text-base font-medium text-gray-900">
+                      {option.name}
+                    </p>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

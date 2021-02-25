@@ -2,7 +2,7 @@ import React from "react";
 import Error from "../Error/error";
 import FlyoutMenu from "../FlyoutMenu/flyoutMenu";
 
-const MusicTable = ({ music, fields }) => {
+const MusicTable = ({ music, fields, options }) => {
   return music && music.length > 0 ? (
     <div className="flex flex-col mb-4">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,7 +39,7 @@ const MusicTable = ({ music, fields }) => {
                         );
                       })}
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <FlyoutMenu />
+                        <FlyoutMenu item={song.id} options={options} />
                       </td>
                     </tr>
                   );

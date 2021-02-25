@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-const PlaylistSidebar = ({ playlists, addPlaylist, deletePlaylist }) => {
+const PlaylistSidebar = ({
+  playlists,
+  addPlaylist,
+  deletePlaylist,
+  length,
+  showPlaylist,
+}) => {
   const [playlistName, setPlaylistName] = useState("");
   const [error, setError] = useState(false);
 
@@ -35,15 +41,16 @@ const PlaylistSidebar = ({ playlists, addPlaylist, deletePlaylist }) => {
             <li
               key={playlist.name}
               className="text-indigo-300 hover:bg-indigo-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+              onClick={() => showPlaylist(playlist.id)}
             >
               {playlist.name}
               <span className="bg-indigo-900 group-hover:bg-indigo-800 ml-auto inline-block py-0.5 px-3 text-xs font-medium rounded-full">
-                {playlist.music.length}
+                {length(playlist.id)}
               </span>
               <button
                 type="button"
                 className="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={(e) => deletePlaylist(playlist.name)}
+                onClick={(e) => deletePlaylist(playlist.id)}
               >
                 <svg
                   className="h-5 w-5"

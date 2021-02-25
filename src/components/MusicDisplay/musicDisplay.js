@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MusicTable from "../MusicTable/musicTable";
 import Filter from "../Filter/filter";
 
-const MusicDisplay = ({ music, fields }) => {
+const MusicDisplay = ({ music, fields, options }) => {
   const [attribute, setAttribute] = useState(fields[0].key);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -34,7 +34,11 @@ const MusicDisplay = ({ music, fields }) => {
           searchTerm={searchTerm}
           updateSearchTerm={updateSearchTerm}
         />
-        <MusicTable music={musicList(music)} fields={fields} />
+        <MusicTable
+          music={musicList(music)}
+          fields={fields}
+          options={options}
+        />
       </div>
     </>
   );
