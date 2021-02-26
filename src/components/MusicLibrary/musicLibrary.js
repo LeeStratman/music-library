@@ -18,8 +18,8 @@ class MusicLibrary extends React.Component {
       music: [],
       error: false,
       playlists: [
-        { id: 1, name: "All" },
-        { id: 2, name: "Favorites" },
+        { id: 1, name: "All", length: 0 },
+        { id: 2, name: "Favorites", length: 0 },
       ],
       activePlaylist: 1,
       activeModal: null,

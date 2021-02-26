@@ -28,6 +28,7 @@ function addNewPlaylist(playlists, name) {
     {
       name: name.trim(),
       id: playlists.length + 1,
+      length: 0,
     },
   ];
 }
