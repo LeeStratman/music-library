@@ -6,6 +6,7 @@ import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
 import {
   getPlaylistLengthFromMusic,
   getPlaylistSongsFromMusic,
+  getPlaylistFromId,
   playlistReducer,
 } from "../../utils/playlists";
 import { musicReducer, fetchMusic, getDisplayFields } from "../../utils/music";
@@ -69,8 +70,13 @@ class MusicLibrary extends React.Component {
       },
       [...this.state.music]
     );
+
     this.setState({
       music: newMusic,
+      playlists: playlistReducer(this.state.playlists, {
+        type: "SET_LENGTH",
+        payload: { playlistId: 1, length: newMusic.length },
+      }),
     });
   }
 
@@ -106,11 +112,13 @@ class MusicLibrary extends React.Component {
 
   addSongToPlaylist(playlistId) {
     this.setState({
-      music: this.state.music.map((musicSong) => {
-        if (musicSong.id === this.state.activeSong) {
-          musicSong.playlists.push(Number(playlistId));
-        }
-        return musicSong;
+      music: musicReducer(this.state.music, {
+        type: "ADD_TO_PLAYLIST",
+        payload: { songId: this.state.activeSong, playlistId },
+      }),
+      playlists: playlistReducer(this.state.playlists, {
+        type: "ADD_TO_PLAYLIST",
+        payload: { playlistId },
       }),
       activeSong: null,
       activeModal: null,
@@ -119,13 +127,13 @@ class MusicLibrary extends React.Component {
 
   removeSongFromActivePlaylist(song) {
     this.setState({
-      music: this.state.music.map((musicSong) => {
-        if (musicSong.id === song.id) {
-          musicSong.playlists.filter(
-            (list) => list !== this.state.activePlaylist
-          );
-        }
-        return musicSong;
+      music: musicReducer(this.state.music, {
+        type: "REMOVE_FROM_PLAYLIST",
+        payload: { songId: song.id, playlistId: this.state.activePlaylist },
+      }),
+      playlists: playlistReducer(this.state.playlists, {
+        type: "REMOVE_FROM_PLAYLIST",
+        payload: { playlistId: this.state.activePlaylist },
       }),
     });
   }
@@ -194,12 +202,12 @@ class MusicLibrary extends React.Component {
           </Modal>
           <PlaylistSidebar
             playlists={playlists}
-            length={this.getPlaylistLength}
             addPlaylist={this.addPlaylist}
             deletePlaylist={this.deletePlaylist}
             showPlaylist={this.setActivePlaylist}
           />
           <MusicDisplay
+            title={getPlaylistFromId(playlists, activePlaylist).name}
             music={this.getPlaylistSongs(activePlaylist)}
             fields={getDisplayFields()}
             options={this.songOptions}

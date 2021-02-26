@@ -12,6 +12,10 @@ export function filterPlaylistByName(playlists, name) {
   );
 }
 
+export function getPlaylistFromId(playlists, id) {
+  return playlists.find((list) => list.id === id);
+}
+
 export function playlistExists(playlists, name) {
   let playlist = filterPlaylistByName(playlists, name);
 
@@ -43,7 +47,46 @@ export function playlistReducer(playlists, action) {
       return addNewPlaylist(playlists, action.payload);
     case "DELETE":
       return deletePlaylist(playlists, action.payload);
+    case "ADD_TO_PLAYLIST":
+      return incrementPlaylistLength(playlists, action.payload);
+    case "REMOVE_FROM_PLAYLIST":
+      return decrementPlaylistLength(playlists, action.payload);
+    case "SET_LENGTH":
+      return setPlaylistLength(playlists, action.payload);
     default:
       return playlists;
   }
+}
+
+function incrementPlaylistLength(playlists, { playlistId }) {
+  return [
+    ...playlists.map((list) => {
+      if (list.id === Number(playlistId)) {
+        list.length = list.length + 1;
+      }
+      return list;
+    }),
+  ];
+}
+
+function decrementPlaylistLength(playlists, { playlistId }) {
+  return [
+    ...playlists.map((list) => {
+      if (list.id === playlistId) {
+        list.length = list.length - 1;
+      }
+      return list;
+    }),
+  ];
+}
+
+function setPlaylistLength(playlists, { playlistId, length }) {
+  return [
+    ...playlists.map((list) => {
+      if (list.id === playlistId) {
+        list.length = length;
+      }
+      return list;
+    }),
+  ];
 }

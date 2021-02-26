@@ -5,7 +5,6 @@ const PlaylistSidebar = ({
   playlists,
   addPlaylist,
   deletePlaylist,
-  length,
   showPlaylist,
 }) => {
   return (
@@ -23,7 +22,7 @@ const PlaylistSidebar = ({
             >
               {playlist.name}
               <span className="bg-indigo-900 group-hover:bg-indigo-800 ml-auto inline-block py-0.5 px-3 text-xs font-medium rounded-full">
-                {length(playlist.id)}
+                {playlist.length}
               </span>
               <button
                 type="button"
