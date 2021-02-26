@@ -5,6 +5,10 @@ import Error from "../Error/error";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 import Modal from "../Modal/modal";
 import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
+import {
+  getPlaylistLengthFromMusic,
+  getPlaylistSongsFromMusic,
+} from "../../utils/playlists";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -68,12 +72,12 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  getPlaylistLength(id) {
-    return this.getPlaylistSongs(id).length;
+  getPlaylistLength(playlistId) {
+    return getPlaylistLengthFromMusic(this.state.music, playlistId);
   }
 
-  getPlaylistSongs(id) {
-    return this.state.music.filter((song) => song.playlists.includes(id));
+  getPlaylistSongs(playlistId) {
+    return getPlaylistSongsFromMusic(this.state.music, playlistId);
   }
 
   setActivePlaylist(id) {
