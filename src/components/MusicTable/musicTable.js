@@ -39,7 +39,7 @@ const MusicTable = ({ music, fields, options }) => {
                         );
                       })}
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <FlyoutMenu item={song.id} options={options} />
+                        <FlyoutMenu song={song.id} options={options} />
                       </td>
                     </tr>
                   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FlyoutMenu = ({ item, options }) => {
+const FlyoutMenu = ({ song, options }) => {
   const [open, setOpen] = useState(false);
 
   const flyoutClass = open
@@ -44,7 +44,10 @@ const FlyoutMenu = ({ item, options }) => {
                   <button
                     key={option.name}
                     className="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150"
-                    onClick={() => option.action(option.id, item)}
+                    onClick={(e) => {
+                      handleClick(e);
+                      option.action(option.id, song);
+                    }}
                   >
                     <p className="text-base font-medium text-gray-900">
                       {option.name}
