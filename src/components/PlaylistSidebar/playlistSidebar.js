@@ -31,7 +31,7 @@ const PlaylistSidebar = ({
     <div className="flex flex-col flex-shrink-0 w-64">
       <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
         <ul
-          className="flex-1 px-2 bg-indigo-600 space-y-1 list-none"
+          className="flex-1 px-2 py-5 bg-indigo-600 space-y-1 list-none"
           aria-label="Sidebar"
         >
           <li className="bg-indig-900 text-indigo group flex items-center px-2 py-2 text-sm font-medium rounded-md">
