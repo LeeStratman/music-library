@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MusicTable from "../MusicTable/musicTable";
 import Filter from "../Filter/filter";
 
-const MusicDisplay = ({ music, fields, options }) => {
+const MusicDisplay = ({ title, music, fields, options }) => {
   const [attribute, setAttribute] = useState(fields[0].key);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -28,6 +28,7 @@ const MusicDisplay = ({ music, fields, options }) => {
     <>
       <div className="flex-grow ml-5">
         <Filter
+          title={title}
           fields={fields}
           attribute={attribute}
           updateAttribute={updateAttribute}
