@@ -10,11 +10,11 @@ const PlaylistSidebar = ({
 }) => {
   return (
     <div className="flex flex-col flex-shrink-0 w-64">
-      <div className="flex-1 flex flex-col px-2 pb-4 bg-indigo-600 overflow-y-auto">
-        <ul className="py-5 space-y-1 list-none" aria-label="Sidebar">
-          <li className="bg-indig-900 text-indigo group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-            Playlists
-          </li>
+      <div className="flex-1 flex flex-col px-2 py-5 bg-indigo-600 overflow-y-auto">
+        <h2 className="text-white group flex items-center px-2 py-2 text-lg font-medium rounded-md">
+          Playlists
+        </h2>
+        <ul className="space-y-1 list-none" aria-label="Sidebar">
           {playlists.map((playlist) => (
             <li
               key={playlist.id}
