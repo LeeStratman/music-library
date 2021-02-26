@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { playlistExists } from "../../utils/playlists";
 
 const PlaylistSidebar = ({
   playlists,
@@ -14,19 +15,9 @@ const PlaylistSidebar = ({
     const { value } = event.target;
 
     setPlaylistName(value);
-    !validatePlaylist(value) ? setError(true) : setError(false);
+    !playlistExists(playlists, value) ? setError(true) : setError(false);
   };
 
-  const validatePlaylist = (value) => {
-    let duplicate = playlists.filter(
-      (list) => list.name.toLowerCase() === value.toLowerCase().trim()
-    );
-
-    if (duplicate.length > 0) {
-      return false;
-    }
-    return true;
-  };
   return (
     <div className="flex flex-col flex-shrink-0 w-64">
       <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
@@ -39,7 +30,7 @@ const PlaylistSidebar = ({
           </li>
           {playlists.map((playlist) => (
             <li
-              key={playlist.name}
+              key={playlist.id}
               className="text-indigo-300 hover:bg-indigo-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
               onClick={() => showPlaylist(playlist.id)}
             >

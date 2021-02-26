@@ -6,11 +6,27 @@ export function getPlaylistSongsFromMusic(music, playlistId) {
   return music.filter((song) => song.playlists.includes(playlistId));
 }
 
+export function filterPlaylistByName(playlists, name) {
+  return playlists.filter(
+    (list) => list.name.toLowerCase() === name.toLowerCase().trim()
+  );
+}
+
+export function playlistExists(playlists, name) {
+  let playlist = filterPlaylistByName(playlists, name);
+
+  if (playlist.length > 0) {
+    return false;
+  }
+
+  return true;
+}
+
 function addNewPlaylist(playlists, name) {
   return [
     ...playlists,
     {
-      name,
+      name: name.trim(),
       id: playlists.length + 1,
     },
   ];
