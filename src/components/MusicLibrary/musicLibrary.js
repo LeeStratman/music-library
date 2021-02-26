@@ -42,7 +42,7 @@ class MusicLibrary extends React.Component {
       { id: 4, name: "Delete", action: this.songActionHandler.bind(this) },
     ];
 
-    this.handleAddPlaylistForm = this.handleAddPlaylistForm.bind(this);
+    this.addPlaylist = this.addPlaylist.bind(this);
     this.deletePlaylist = this.deletePlaylist.bind(this);
     this.getPlaylistLength = this.getPlaylistLength.bind(this);
     this.setActivePlaylist = this.setActivePlaylist.bind(this);
@@ -150,12 +150,6 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  handleAddPlaylistForm(event) {
-    event.preventDefault();
-    let name = event.target.elements.addPlaylist.value;
-    this.addPlaylist(name);
-  }
-
   getSongAction() {
     switch (this.state.activeModal) {
       case 1:
@@ -203,7 +197,7 @@ class MusicLibrary extends React.Component {
               <PlaylistSidebar
                 playlists={playlists}
                 length={this.getPlaylistLength}
-                addPlaylist={this.handleAddPlaylistForm}
+                addPlaylist={this.addPlaylist}
                 deletePlaylist={this.deletePlaylist}
                 showPlaylist={this.setActivePlaylist}
               />

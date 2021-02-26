@@ -18,6 +18,12 @@ const PlaylistSidebar = ({
     !playlistExists(playlists, value) ? setError(true) : setError(false);
   };
 
+  const handleAddPlaylistForm = (event) => {
+    event.preventDefault();
+    let name = event.target.elements.addPlaylist.value;
+    addPlaylist(name);
+  };
+
   return (
     <div className="flex flex-col flex-shrink-0 w-64">
       <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
@@ -61,7 +67,7 @@ const PlaylistSidebar = ({
             </li>
           ))}
 
-          <form onSubmit={addPlaylist}>
+          <form onSubmit={handleAddPlaylistForm}>
             <label
               htmlFor="addPlaylist"
               className="block text-sm font-medium text-gray-700 sr-only"
