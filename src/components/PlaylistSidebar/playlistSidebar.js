@@ -9,7 +9,7 @@ const PlaylistSidebar = ({
   showPlaylist,
 }) => {
   return (
-    <div className="flex flex-col flex-shrink-0 w-64">
+    <div className="flex flex-col flex-shrink-0 w-100">
       <div className="flex-1 flex flex-col px-2 py-5 bg-indigo-600 overflow-y-auto">
         <h2 className="text-white group flex items-center px-2 py-2 text-lg font-medium rounded-md">
           Playlists
