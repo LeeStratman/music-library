@@ -1,5 +1,4 @@
 import React from "react";
-import { getDisplayFields, cleanMusic, fetchMusic } from "../../music";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import Error from "../Error/error";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
@@ -10,6 +9,8 @@ import {
   getPlaylistSongsFromMusic,
   playlistReducer,
 } from "../../utils/playlists";
+
+import { musicReducer, fetchMusic, getDisplayFields } from "../../utils/music";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -63,13 +64,14 @@ class MusicLibrary extends React.Component {
   }
 
   musicInit(music) {
+    let newMusic = music.reduce(
+      (accumulator, song) => {
+        return musicReducer(accumulator, { type: "ADD", payload: song });
+      },
+      [...this.state.music]
+    );
     this.setState({
-      music: [
-        ...cleanMusic(music).map((song) => {
-          song.playlists = [1];
-          return song;
-        }),
-      ],
+      music: newMusic,
     });
   }
 
