@@ -5,13 +5,13 @@ const Filter = (props) => {
     <div className="mb-4">
       <label
         htmlFor="filter"
-        className="block text-sm font-medium text-gray-700"
+        className="sr-only block text-sm font-medium text-gray-700"
       >
         Filter Music
       </label>
       <div className="mt-1 relative rounded-md shadow-sm">
         <div className="absolute inset-y-0 left-0 flex items-center">
-          <label htmlFor="country" className="sr-only">
+          <label htmlFor="category" className="sr-only">
             Category
           </label>
           <select
