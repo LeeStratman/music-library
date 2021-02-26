@@ -8,6 +8,7 @@ import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
 import {
   getPlaylistLengthFromMusic,
   getPlaylistSongsFromMusic,
+  playlistReducer,
 } from "../../utils/playlists";
 
 class MusicLibrary extends React.Component {
@@ -88,10 +89,10 @@ class MusicLibrary extends React.Component {
 
   addPlaylist(name) {
     this.setState({
-      playlists: [
-        ...this.state.playlists,
-        { name, id: this.state.playlists.length + 1 },
-      ],
+      playlists: playlistReducer(this.state.playlists, {
+        type: "ADD",
+        payload: name,
+      }),
     });
   }
 
@@ -132,10 +133,14 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  deletePlaylist(id) {
-    let playlists = this.state.playlists.filter((list) => list.id !== id);
+  deletePlaylist(playlistId) {
+    let playlists = playlistReducer(this.state.playlists, {
+      type: "DELETE",
+      payload: playlistId,
+    });
+
     let music = this.state.music.map((song) => {
-      song.playlists = song.playlists.filter((list) => list !== id);
+      song.playlists = song.playlists.filter((list) => list !== playlistId);
       return song;
     });
 
