@@ -65,3 +65,7 @@ function cleanSong(song) {
     return accumulator;
   }, {});
 }
+
+export function getSongById(music, songId) {
+  return music.find((song) => song.id === songId);
+}

@@ -97,10 +97,6 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  getSongById(id) {
-    return this.state.music.find((song) => song.id === id);
-  }
-
   songActionHandler(actionId, songId) {
     this.setState({
       activeModal: actionId,
