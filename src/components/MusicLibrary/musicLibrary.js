@@ -1,6 +1,5 @@
 import React from "react";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
-import Error from "../Error/error";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 import Modal from "../Modal/modal";
 import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
@@ -9,8 +8,8 @@ import {
   getPlaylistSongsFromMusic,
   playlistReducer,
 } from "../../utils/playlists";
-
 import { musicReducer, fetchMusic, getDisplayFields } from "../../utils/music";
+import Alert from "../Alert/alert";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -58,7 +57,7 @@ class MusicLibrary extends React.Component {
       })
       .catch((error) => {
         this.setState({
-          error: `Library failed with following error: ${error.message}`,
+          error: error.message,
         });
       });
   }
@@ -163,7 +162,7 @@ class MusicLibrary extends React.Component {
           />
         );
       default:
-        return <Error message="No modal found" />;
+        return <Alert title={"Error"} message="No modal found" />;
     }
   }
 
@@ -188,29 +187,28 @@ class MusicLibrary extends React.Component {
 
     return (
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-        {error ? (
-          <Error message={error} />
-        ) : (
-          <>
-            <div className="flex bg-white">
-              <Modal active={activeModal} close={this.closeModal}>
-                {this.getSongAction(activeModal)}
-              </Modal>
-              <PlaylistSidebar
-                playlists={playlists}
-                length={this.getPlaylistLength}
-                addPlaylist={this.addPlaylist}
-                deletePlaylist={this.deletePlaylist}
-                showPlaylist={this.setActivePlaylist}
-              />
-              <MusicDisplay
-                music={this.getPlaylistSongs(activePlaylist)}
-                fields={getDisplayFields()}
-                options={this.songOptions}
-              />
-            </div>
-          </>
+        {error && (
+          <div className="my-5">
+            <Alert title={"Music Library Failed to Load"} message={error} />
+          </div>
         )}
+        <div className="flex bg-white">
+          <Modal active={activeModal} close={this.closeModal}>
+            {this.getSongAction(activeModal)}
+          </Modal>
+          <PlaylistSidebar
+            playlists={playlists}
+            length={this.getPlaylistLength}
+            addPlaylist={this.addPlaylist}
+            deletePlaylist={this.deletePlaylist}
+            showPlaylist={this.setActivePlaylist}
+          />
+          <MusicDisplay
+            music={this.getPlaylistSongs(activePlaylist)}
+            fields={getDisplayFields()}
+            options={this.songOptions}
+          />
+        </div>
       </div>
     );
   }
