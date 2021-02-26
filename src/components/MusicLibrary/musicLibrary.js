@@ -187,7 +187,7 @@ class MusicLibrary extends React.Component {
           <Error message={error} />
         ) : (
           <>
-            <div className="flex overflow-hidden bg-white">
+            <div className="flex bg-white">
               <Modal active={activeModal} close={this.closeModal}>
                 {this.getSongAction(activeModal)}
               </Modal>
