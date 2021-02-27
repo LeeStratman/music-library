@@ -16,6 +16,7 @@ const FlyoutMenu = ({ song, options }) => {
       <div className="relative">
         <button
           onClick={(e) => handleClick(e)}
+          onBlur={handleClick}
           className="inline-flex items-center p-1 text-indigo-700 border border-transparent rounded-full shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           <svg
