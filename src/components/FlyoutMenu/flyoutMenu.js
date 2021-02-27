@@ -11,8 +11,19 @@ const FlyoutMenu = ({ song, options }) => {
   useEffect(() => {
     if (open) {
       menu.current.querySelector("button").focus();
+      window.addEventListener("click", onClickOutsideComponent);
     }
+
+    return () => {
+      window.removeEventListener("click", onClickOutsideComponent);
+    };
   });
+
+  function onClickOutsideComponent(e) {
+    if (open) {
+      setOpen(false);
+    }
+  }
 
   function handleClick(e) {
     setOpen(!open);
@@ -46,9 +57,7 @@ const FlyoutMenu = ({ song, options }) => {
         >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div
-              tabIndex={1}
               ref={menu}
-              onBlur={(e) => setOpen(false)}
               className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8"
             >
               {options.map((option) => {
@@ -57,8 +66,11 @@ const FlyoutMenu = ({ song, options }) => {
                     key={option.name}
                     className="z-50 -m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150"
                     onClick={(e) => {
+                      e.stopPropagation();
+                      handleClick(e);
                       option.action(option.id, song);
                     }}
+                    onBlur={(e) => e.stopPropagation()}
                   >
                     <p className="text-base font-medium text-gray-900">
                       {option.name}
