@@ -15,6 +15,7 @@ import {
   fetchMusic,
   getDisplayFields,
   cleanMusic,
+  getSongFromId,
 } from "../../utils/music/music";
 import DeleteSongFromPlaylistForm from "../DeleteSongFromPlaylistForm/DeleteSongFromPlaylistForm";
 
@@ -172,7 +173,7 @@ class MusicLibrary extends React.Component {
       case 1:
         return (
           <AddSongToPlaylistForm
-            songId={this.state.activeSong}
+            song={getSongFromId(this.state.music, this.state.activeSong)}
             playlists={this.state.playlists}
             action={this.getCallback(this.state.activeModal)}
           />
@@ -180,8 +181,11 @@ class MusicLibrary extends React.Component {
       case 2:
         return (
           <DeleteSongFromPlaylistForm
-            songId={this.state.activeSong}
-            playlistId={this.state.activePlaylist}
+            song={getSongFromId(this.state.music, this.state.activeSong)}
+            playlist={getPlaylistFromId(
+              this.state.playlists,
+              this.state.activePlaylist
+            )}
             action={this.getCallback(this.state.activeModal)}
           />
         );

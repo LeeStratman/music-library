@@ -47,6 +47,6 @@ function cleanSong(song) {
   }, {});
 }
 
-export function getSongById(music, songId) {
+export function getSongFromId(music, songId) {
   return music.find((song) => song.id === songId);
 }
