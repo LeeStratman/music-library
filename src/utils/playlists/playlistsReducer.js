@@ -26,7 +26,10 @@ function addNewPlaylist(playlists, name) {
   ];
 }
 
-function deletePlaylist(playlists, playlistId) {
+function deletePlaylist(playlists, { playlistId }) {
+  console.log("delete", [
+    ...playlists.filter((list) => list.id !== playlistId),
+  ]);
   return [...playlists.filter((list) => list.id !== playlistId)];
 }
 

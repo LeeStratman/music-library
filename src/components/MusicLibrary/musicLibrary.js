@@ -152,9 +152,15 @@ class MusicLibrary extends React.Component {
   }
 
   deletePlaylist(playlistId) {
+    if (playlistId === 1) {
+      return;
+      // TODO: Cannot delete all playlist.
+    }
+    let activePlaylist = this.state.activePlaylist;
+
     let playlists = playlistReducer(this.state.playlists, {
       type: "DELETE",
-      payload: playlistId,
+      payload: { playlistId },
     });
 
     let music = this.state.music.map((song) => {
@@ -162,9 +168,14 @@ class MusicLibrary extends React.Component {
       return song;
     });
 
+    if (playlistId === this.state.activePlaylist) {
+      activePlaylist = 1;
+    }
+
     this.setState({
       music,
       playlists,
+      activePlaylist,
     });
   }
 
