@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { playlistExists } from "../../utils/playlists";
+import { playlistExists } from "../../utils/playlists/playlists";
 
 const AddPlaylistForm = ({ playlists, addPlaylist }) => {
   const [playlistName, setPlaylistName] = useState("");

@@ -3,14 +3,19 @@ import MusicDisplay from "../MusicDisplay/musicDisplay";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 import Modal from "../Modal/modal";
 import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
+import Alert from "../Alert/alert";
+import musicReducer from "../../utils/music/musicReducer";
+import playlistReducer from "../../utils/playlists/playlistsReducer";
 import {
   getPlaylistLengthFromMusic,
   getPlaylistSongsFromMusic,
   getPlaylistFromId,
-  playlistReducer,
-} from "../../utils/playlists";
-import { musicReducer, fetchMusic, getDisplayFields } from "../../utils/music";
-import Alert from "../Alert/alert";
+} from "../../utils/playlists/playlists";
+import {
+  fetchMusic,
+  getDisplayFields,
+  cleanMusic,
+} from "../../utils/music/music";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -64,9 +69,12 @@ class MusicLibrary extends React.Component {
   }
 
   musicInit(music) {
-    let newMusic = music.reduce(
+    let newMusic = cleanMusic(music).reduce(
       (accumulator, song) => {
-        return musicReducer(accumulator, { type: "ADD", payload: song });
+        return musicReducer(accumulator, {
+          type: "ADD",
+          payload: song,
+        });
       },
       [...this.state.music]
     );
