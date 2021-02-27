@@ -2,7 +2,7 @@ import React from "react";
 import MusicDisplay from "../MusicDisplay/musicDisplay";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 import Modal from "../Modal/modal";
-import AddToPlaylistModal from "../AddToPlaylistModal/addToPlaylistModal";
+import AddSongToPlaylistForm from "../AddSongToPlaylistForm/addSongToPlaylistForm";
 import Alert from "../Alert/alert";
 import musicReducer from "../../utils/music/musicReducer";
 import playlistReducer from "../../utils/playlists/playlistsReducer";
@@ -16,6 +16,7 @@ import {
   getDisplayFields,
   cleanMusic,
 } from "../../utils/music/music";
+import DeleteSongFromPlaylistForm from "../DeleteSongFromPlaylistForm/DeleteSongFromPlaylistForm";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class MusicLibrary extends React.Component {
         id: 2,
         name: "Remove from playlist",
         action: this.songActionHandler.bind(this),
+        callback: this.deleteSongFromPlaylist.bind(this),
       },
       { id: 3, name: "Update", action: this.songActionHandler.bind(this) },
       { id: 4, name: "Delete", action: this.songActionHandler.bind(this) },
@@ -118,11 +120,11 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  addSongToPlaylist(playlistId) {
+  addSongToPlaylist(songId, playlistId) {
     this.setState({
       music: musicReducer(this.state.music, {
         type: "ADD_TO_PLAYLIST",
-        payload: { songId: this.state.activeSong, playlistId },
+        payload: { songId: songId, playlistId },
       }),
       playlists: playlistReducer(this.state.playlists, {
         type: "ADD_TO_PLAYLIST",
@@ -133,16 +135,18 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  removeSongFromActivePlaylist(song) {
+  deleteSongFromPlaylist(songId, playlistId) {
     this.setState({
       music: musicReducer(this.state.music, {
         type: "REMOVE_FROM_PLAYLIST",
-        payload: { songId: song.id, playlistId: this.state.activePlaylist },
+        payload: { songId, playlistId },
       }),
       playlists: playlistReducer(this.state.playlists, {
         type: "REMOVE_FROM_PLAYLIST",
-        payload: { playlistId: this.state.activePlaylist },
+        payload: { playlistId },
       }),
+      activeSong: null,
+      activeModal: null,
     });
   }
 
@@ -167,10 +171,18 @@ class MusicLibrary extends React.Component {
     switch (this.state.activeModal) {
       case 1:
         return (
-          <AddToPlaylistModal
-            song={this.state.activeSong}
+          <AddSongToPlaylistForm
+            songId={this.state.activeSong}
             playlists={this.state.playlists}
-            callback={this.getCallback(this.state.activeModal)}
+            action={this.getCallback(this.state.activeModal)}
+          />
+        );
+      case 2:
+        return (
+          <DeleteSongFromPlaylistForm
+            songId={this.state.activeSong}
+            playlistId={this.state.activePlaylist}
+            action={this.getCallback(this.state.activeModal)}
           />
         );
       default:

@@ -38,7 +38,9 @@ function removeSongFromPlaylist(music, { songId, playlistId }) {
   return [
     ...music.map((song) => {
       if (song.id === songId) {
-        song.playlists = song.playlists.fitler((list) => list !== playlistId);
+        song.playlists = song.playlists.filter(
+          (list) => list !== Number(playlistId)
+        );
       }
       return song;
     }),

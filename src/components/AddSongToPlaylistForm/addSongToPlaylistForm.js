@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddToPlaylist = ({ song, playlists, callback }) => {
+const AddSongToPlaylistForm = ({ song, playlists, action }) => {
   const [selectedPlaylist, setPlaylist] = useState("");
   return (
     <>
@@ -8,7 +8,7 @@ const AddToPlaylist = ({ song, playlists, callback }) => {
         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
             className="text-lg leading-6 font-medium text-gray-900"
-            id="modal-headline"
+            id="form-headline"
           >
             Add Song to Playlist
           </h3>
@@ -39,7 +39,7 @@ const AddToPlaylist = ({ song, playlists, callback }) => {
       </div>
       <div className="mt-5 sm:mt-4 sm:flex">
         <button
-          onClick={() => callback(selectedPlaylist)}
+          onClick={() => action(song.id, selectedPlaylist)}
           type="button"
           className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
         >
@@ -50,4 +50,4 @@ const AddToPlaylist = ({ song, playlists, callback }) => {
   );
 };
 
-export default AddToPlaylist;
+export default AddSongToPlaylistForm;

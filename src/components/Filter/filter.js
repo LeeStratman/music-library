@@ -2,9 +2,11 @@ import React from "react";
 
 const Filter = (props) => {
   return (
-    <div class="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">{props.title}</h3>
-      <div class="flex-1 mt-3 sm:mt-0 sm:ml-4">
+    <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+      <h3 className="text-lg leading-6 font-medium text-gray-900">
+        {props.title}
+      </h3>
+      <div className="flex-1 mt-3 sm:mt-0 sm:ml-4">
         <label
           htmlFor="filter"
           className="sr-only block text-sm font-medium text-gray-700"
