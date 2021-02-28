@@ -3,6 +3,8 @@ import MusicDisplay from "../MusicDisplay/musicDisplay";
 import PlaylistSidebar from "../PlaylistSidebar/playlistSidebar";
 import Modal from "../Modal/modal";
 import AddSongToPlaylistForm from "../AddSongToPlaylistForm/addSongToPlaylistForm";
+import DeleteSongFromPlaylistForm from "../DeleteSongFromPlaylistForm/DeleteSongFromPlaylistForm";
+import UpdateSongForm from "../UpdateSongForm/updateSongForm";
 import Alert from "../Alert/alert";
 import musicReducer from "../../utils/music/musicReducer";
 import playlistReducer from "../../utils/playlists/playlistsReducer";
@@ -17,7 +19,6 @@ import {
   cleanMusic,
   getSongFromId,
 } from "../../utils/music/music";
-import DeleteSongFromPlaylistForm from "../DeleteSongFromPlaylistForm/DeleteSongFromPlaylistForm";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -47,7 +48,12 @@ class MusicLibrary extends React.Component {
         action: this.songActionHandler.bind(this),
         callback: this.deleteSongFromPlaylist.bind(this),
       },
-      { id: 3, name: "Update", action: this.songActionHandler.bind(this) },
+      {
+        id: 3,
+        name: "Update",
+        action: this.songActionHandler.bind(this),
+        callback: this.updateSong.bind(this),
+      },
       { id: 4, name: "Delete", action: this.songActionHandler.bind(this) },
     ];
 
@@ -88,6 +94,16 @@ class MusicLibrary extends React.Component {
         type: "SET_LENGTH",
         payload: { playlistId: 1, length: newMusic.length },
       }),
+    });
+  }
+
+  updateSong(song) {
+    this.setState({
+      music: musicReducer(this.state.music, {
+        type: "UPDATE",
+        payload: { song: song },
+      }),
+      activeModal: null,
     });
   }
 
@@ -197,6 +213,13 @@ class MusicLibrary extends React.Component {
               this.state.playlists,
               this.state.activePlaylist
             )}
+            action={this.getCallback(this.state.activeModal)}
+          />
+        );
+      case 3:
+        return (
+          <UpdateSongForm
+            song={getSongFromId(this.state.music, this.state.activeSong)}
             action={this.getCallback(this.state.activeModal)}
           />
         );

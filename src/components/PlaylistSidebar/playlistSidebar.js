@@ -15,9 +15,8 @@ const PlaylistSidebar = ({
         </h2>
         <ul className="space-y-1 list-none" aria-label="Sidebar">
           {playlists.map((playlist) => (
-            <div className="flex justify-between">
+            <div key={playlist.id} className="flex justify-between">
               <li
-                key={playlist.id}
                 className="text-indigo-300 hover:bg-indigo-700 hover:text-white group flex flex-1 items-center px-2 py-2 text-sm font-medium rounded-md"
                 onClick={() => showPlaylist(playlist.id)}
               >

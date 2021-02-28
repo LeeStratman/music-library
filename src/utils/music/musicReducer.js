@@ -4,6 +4,8 @@ export default function musicReducer(music, action) {
       return addSong(music, action.payload);
     case "DELETE":
       return deleteSong(music, action.payload);
+    case "UPDATE":
+      return updateSong(music, action.payload);
     case "ADD_TO_PLAYLIST":
       return addSongToPlaylist(music, action.payload);
     case "REMOVE_FROM_PLAYLIST":
@@ -19,6 +21,17 @@ function addSong(music, song) {
 
 function deleteSong(music, songId) {
   return [...music.filter((song) => song.id !== songId)];
+}
+
+function updateSong(music, { song }) {
+  return [
+    ...music.map((currentSong) => {
+      if (currentSong.id === song.id) {
+        return song;
+      }
+      return currentSong;
+    }),
+  ];
 }
 
 function addSongToPlaylist(music, { songId, playlistId }) {
