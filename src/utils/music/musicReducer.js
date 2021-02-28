@@ -19,7 +19,7 @@ function addSong(music, song) {
   return [...music, song];
 }
 
-function deleteSong(music, songId) {
+function deleteSong(music, { songId }) {
   return [...music.filter((song) => song.id !== songId)];
 }
 

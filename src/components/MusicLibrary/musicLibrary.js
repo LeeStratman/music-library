@@ -19,7 +19,9 @@ import {
   getDisplayFields,
   cleanMusic,
   getSongFromId,
+  deleteSongRequest,
 } from "../../utils/music/music";
+import DeleteSongForm from "../DeleteSongForm/DeleteSongForm";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -55,7 +57,12 @@ class MusicLibrary extends React.Component {
         action: this.songActionHandler.bind(this),
         callback: this.updateSong.bind(this),
       },
-      { id: 4, name: "Delete", action: this.songActionHandler.bind(this) },
+      {
+        id: 4,
+        name: "Delete",
+        action: this.songActionHandler.bind(this),
+        callback: this.deleteSong.bind(this),
+      },
     ];
 
     this.addPlaylist = this.addPlaylist.bind(this);
@@ -105,6 +112,28 @@ class MusicLibrary extends React.Component {
           music: musicReducer(this.state.music, {
             type: "UPDATE",
             payload: { song: song },
+          }),
+          activeModal: null,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        });
+      });
+  }
+
+  deleteSong(song) {
+    deleteSongRequest(song.id)
+      .then((data) => {
+        this.setState({
+          music: musicReducer(this.state.music, {
+            type: "DELETE",
+            payload: { songId: song.id },
+          }),
+          playlists: playlistReducer(this.state.playlists, {
+            type: "REMOVE_FROM_PLAYLISTS",
+            payload: { playlistIds: song.playlists },
           }),
           activeModal: null,
         });
@@ -228,6 +257,13 @@ class MusicLibrary extends React.Component {
       case 3:
         return (
           <UpdateSongForm
+            song={getSongFromId(this.state.music, this.state.activeSong)}
+            action={this.getCallback(this.state.activeModal)}
+          />
+        );
+      case 4:
+        return (
+          <DeleteSongForm
             song={getSongFromId(this.state.music, this.state.activeSong)}
             action={this.getCallback(this.state.activeModal)}
           />

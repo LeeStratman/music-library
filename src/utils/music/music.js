@@ -10,6 +10,10 @@ export function updateSongRequest(song) {
   return axios.put(`${baseURL}/${song.id}`, song);
 }
 
+export function deleteSongRequest(songId) {
+  return axios.delete(`${baseURL}/${songId}`);
+}
+
 export const fields = [
   { key: "id", name: "Release Date", display: false, default: "" },
   { key: "title", name: "Title", display: true, default: "" },

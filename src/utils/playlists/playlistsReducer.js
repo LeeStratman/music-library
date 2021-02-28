@@ -8,6 +8,8 @@ export default function playlistReducer(playlists, action) {
       return incrementPlaylistLength(playlists, action.payload);
     case "REMOVE_FROM_PLAYLIST":
       return decrementPlaylistLength(playlists, action.payload);
+    case "REMOVE_FROM_PLAYLISTS":
+      return decrementPlaylistsLength(playlists, action.payload);
     case "SET_LENGTH":
       return setPlaylistLength(playlists, action.payload);
     default:
@@ -48,6 +50,18 @@ function decrementPlaylistLength(playlists, { playlistId }) {
   return [
     ...playlists.map((list) => {
       if (list.id === playlistId) {
+        list.length = list.length - 1;
+      }
+      return list;
+    }),
+  ];
+}
+
+function decrementPlaylistsLength(playlists, { playlistIds }) {
+  console.log("removing from all playlists");
+  return [
+    ...playlists.map((list) => {
+      if (playlistIds.includes(list.id)) {
         list.length = list.length - 1;
       }
       return list;
