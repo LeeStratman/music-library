@@ -3,7 +3,7 @@ export function getPlaylistLengthFromMusic(music, playlistId) {
 }
 
 export function getPlaylistSongsFromMusic(music, playlistId) {
-  return music.filter((song) => song.playlists.includes(playlistId));
+  return music.filter((song, index) => song.playlists.includes(playlistId));
 }
 
 export function filterPlaylistByName(playlists, name) {

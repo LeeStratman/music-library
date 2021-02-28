@@ -29,9 +29,6 @@ function addNewPlaylist(playlists, name) {
 }
 
 function deletePlaylist(playlists, { playlistId }) {
-  console.log("delete", [
-    ...playlists.filter((list) => list.id !== playlistId),
-  ]);
   return [...playlists.filter((list) => list.id !== playlistId)];
 }
 
@@ -58,7 +55,6 @@ function decrementPlaylistLength(playlists, { playlistId }) {
 }
 
 function decrementPlaylistsLength(playlists, { playlistIds }) {
-  console.log("removing from all playlists");
   return [
     ...playlists.map((list) => {
       if (playlistIds.includes(list.id)) {

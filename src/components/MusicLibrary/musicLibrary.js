@@ -18,10 +18,13 @@ import {
   updateSongRequest,
   getDisplayFields,
   cleanMusic,
+  cleanSong,
   getSongFromId,
   deleteSongRequest,
+  addSongRequest,
 } from "../../utils/music/music";
 import DeleteSongForm from "../DeleteSongForm/DeleteSongForm";
+import AddSongForm from "../AddSongForm/AddSongForm";
 
 class MusicLibrary extends React.Component {
   constructor(props) {
@@ -62,6 +65,12 @@ class MusicLibrary extends React.Component {
         name: "Delete",
         action: this.songActionHandler.bind(this),
         callback: this.deleteSong.bind(this),
+      },
+      {
+        id: 5,
+        name: "Add",
+        action: this.songActionHandler.bind(this),
+        callback: this.addSong.bind(this),
       },
     ];
 
@@ -145,6 +154,28 @@ class MusicLibrary extends React.Component {
       });
   }
 
+  addSong(song) {
+    addSongRequest(song)
+      .then((data) => {
+        this.setState({
+          music: musicReducer(this.state.music, {
+            type: "ADD",
+            payload: cleanSong(data.data),
+          }),
+          playlists: playlistReducer(this.state.playlists, {
+            type: "ADD_TO_PLAYLIST",
+            payload: { playlistId: 1 },
+          }),
+          activeModal: null,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        });
+      });
+  }
+
   getPlaylistLength(playlistId) {
     return getPlaylistLengthFromMusic(this.state.music, playlistId);
   }
@@ -168,7 +199,7 @@ class MusicLibrary extends React.Component {
     });
   }
 
-  songActionHandler(actionId, songId) {
+  songActionHandler(actionId, songId = null) {
     this.setState({
       activeModal: actionId,
       activeSong: songId,
@@ -268,6 +299,10 @@ class MusicLibrary extends React.Component {
             action={this.getCallback(this.state.activeModal)}
           />
         );
+      case 5:
+        return (
+          <AddSongForm action={this.getCallback(this.state.activeModal)} />
+        );
       default:
         return <Alert title={"Error"} message="No modal found" />;
     }
@@ -299,6 +334,13 @@ class MusicLibrary extends React.Component {
             <Alert title={"Music Library Failed to Load"} message={error} />
           </div>
         )}
+        <button
+          onClick={() => this.songActionHandler(5)}
+          type="button"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Add Song
+        </button>
         <div className="flex bg-white">
           <Modal active={activeModal} close={this.closeModal}>
             {this.getSongAction(activeModal)}

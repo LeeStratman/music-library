@@ -14,6 +14,10 @@ export function deleteSongRequest(songId) {
   return axios.delete(`${baseURL}/${songId}`);
 }
 
+export function addSongRequest(song) {
+  return axios.post(`${baseURL}`, song);
+}
+
 export const fields = [
   { key: "id", name: "Release Date", display: false, default: "" },
   { key: "title", name: "Title", display: true, default: "" },
@@ -46,7 +50,7 @@ export function cleanMusic(music) {
   return music.map((song) => cleanSong(song));
 }
 
-function cleanSong(song) {
+export function cleanSong(song) {
   return getExpectedKeys().reduce((accumulator, field) => {
     if (song.hasOwnProperty(field.key)) {
       accumulator[field.key] = song[field.key];

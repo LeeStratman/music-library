@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const UpdateSongForm = ({ song, action }) => {
-  const [title, setTitle] = useState(song.title);
-  const [album, setAlbum] = useState(song.album);
-  const [artist, setArtist] = useState(song.artist);
-  const [genre, setGenre] = useState(song.genre);
-  const [releaseDate, setReleaseDate] = useState(song.releaseDate);
+const AddSongForm = ({ action }) => {
+  const [title, setTitle] = useState("");
+  const [album, setAlbum] = useState("");
+  const [artist, setArtist] = useState("");
+  const [genre, setGenre] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
 
   return (
     <>
@@ -15,7 +15,7 @@ const UpdateSongForm = ({ song, action }) => {
             className="text-lg leading-6 font-medium text-gray-900"
             id="form-headline"
           >
-            Update Song
+            Add Song
           </h3>
           <div className="mt-2">
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5">
@@ -105,7 +105,6 @@ const UpdateSongForm = ({ song, action }) => {
         <button
           onClick={() =>
             action({
-              ...song,
               title,
               album,
               artist,
@@ -116,11 +115,11 @@ const UpdateSongForm = ({ song, action }) => {
           type="button"
           className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
         >
-          Update
+          Add
         </button>
       </div>
     </>
   );
 };
 
-export default UpdateSongForm;
+export default AddSongForm;
