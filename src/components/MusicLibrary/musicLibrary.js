@@ -15,6 +15,7 @@ import {
 } from "../../utils/playlists/playlists";
 import {
   fetchMusic,
+  updateSongRequest,
   getDisplayFields,
   cleanMusic,
   getSongFromId,
@@ -98,13 +99,21 @@ class MusicLibrary extends React.Component {
   }
 
   updateSong(song) {
-    this.setState({
-      music: musicReducer(this.state.music, {
-        type: "UPDATE",
-        payload: { song: song },
-      }),
-      activeModal: null,
-    });
+    updateSongRequest(song)
+      .then((data) => {
+        this.setState({
+          music: musicReducer(this.state.music, {
+            type: "UPDATE",
+            payload: { song: song },
+          }),
+          activeModal: null,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        });
+      });
   }
 
   getPlaylistLength(playlistId) {

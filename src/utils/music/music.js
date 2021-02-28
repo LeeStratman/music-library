@@ -1,7 +1,13 @@
 import axios from "axios";
 
+const baseURL = `http://localhost:3000/api/music`;
+
 export function fetchMusic() {
-  return axios.get(`http://www.devcodecampmusiclibrary.com/api/music`);
+  return axios.get(baseURL);
+}
+
+export function updateSongRequest(song) {
+  return axios.put(`${baseURL}/${song.id}`, song);
 }
 
 export const fields = [
