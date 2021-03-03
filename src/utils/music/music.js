@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = `http://localhost:3000/api/music`;
+const baseURL = `http://localhost:5000/api/music`;
 
 export function fetchMusic() {
   return axios.get(baseURL);
